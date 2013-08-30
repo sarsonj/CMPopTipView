@@ -68,10 +68,10 @@
 
 - (void)layoutSubviews {
 	if (self.customView) {
-		
 		CGRect contentFrame = [self contentFrame];
         [self.customView setFrame:contentFrame];
     }
+    NSLog(@"Layout...");
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -464,15 +464,18 @@
 }
 
 - (void)presentPointingAtBarButtonItem:(UIBarButtonItem *)barButtonItem animated:(BOOL)animated {
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate:) name:UIDeviceOrientationDidChangeNotification object:nil];
+
 	UIView *targetView = (UIView *)[barButtonItem performSelector:@selector(view)];
 	UIView *targetSuperview = [targetView superview];
 	UIView *containerView = nil;
-	if ([targetSuperview isKindOfClass:[UINavigationBar class]]) {
-		containerView = [UIApplication sharedApplication].keyWindow;
-	}
-	else if ([targetSuperview isKindOfClass:[UIToolbar class]]) {
+//	if ([targetSuperview isKindOfClass:[UINavigationBar class]]) {
+//		containerView = [UIApplication sharedApplication].keyWindow;
+//	}
+//	else if ([targetSuperview isKindOfClass:[UIToolbar class]]) {
 		containerView = [targetSuperview superview];
-	}
+//	}
 	
 	if (nil == containerView) {
 		NSLog(@"Cannot determine container view from UIBarButtonItem: %@", barButtonItem);
@@ -484,6 +487,19 @@
 	
 	[self presentPointingAtView:targetView inView:containerView animated:animated];
 }
+
+
+
+- (void)didRotate:(id)didRotate {
+    if ([self.targetObject isKindOfClass:[UIBarButtonItem class]]) {
+        [self dismissAnimated:NO];
+/*
+        [self removeFromSuperview];
+        [self presentPointingAtBarButtonItem:self.targetObject animated:NO];
+*/
+    }
+}
+
 
 - (void)finaliseDismiss {
 	[self.autoDismissTimer invalidate]; self.autoDismissTimer = nil;
