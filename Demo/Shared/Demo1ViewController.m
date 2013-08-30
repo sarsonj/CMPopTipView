@@ -136,6 +136,7 @@
 #pragma mark -
 #pragma mark UIViewController methods
 
+/*
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
 	for (CMPopTipView *popTipView in self.visiblePopTipViews) {
@@ -152,6 +153,7 @@
 		}
 	}
 }
+*/
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
