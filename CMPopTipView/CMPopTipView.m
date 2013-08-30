@@ -492,7 +492,12 @@
 
 - (void)didRotate:(id)didRotate {
     if ([self.targetObject isKindOfClass:[UIBarButtonItem class]]) {
+        __strong CMPopTipView* myself = self;
+        __strong id myTargetObject = myself.targetObject;
         [self dismissAnimated:NO];
+        [myself presentPointingAtBarButtonItem:myTargetObject animated:NO];
+
+
 /*
         [self removeFromSuperview];
         [self presentPointingAtBarButtonItem:self.targetObject animated:NO];
