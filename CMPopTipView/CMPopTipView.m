@@ -32,8 +32,7 @@
 	CGFloat					_cornerRadius;
 	BOOL					_highlight;
 	CGFloat					_sidePadding;
-	CGFloat					_topMargin;
-	PointDirection			_pointDirection;
+    PointDirection			_pointDirection;
 	CGFloat					_pointerSize;
 	CGPoint					_targetPoint;
 }
@@ -409,7 +408,7 @@
 	CGFloat fullHeight = _bubbleSize.height + _pointerSize + 10.0;
 	CGFloat y_b;
 	if (_pointDirection == PointDirectionUp) {
-		y_b = _topMargin + pointerY;
+		y_b = self.topMargin + pointerY;
 		_targetPoint = CGPointMake(x_p-x_b, 0);
 	}
 	else {
@@ -601,7 +600,7 @@
 		self.opaque = NO;
 		
 		_cornerRadius = 10.0;
-		_topMargin = 2.0;
+		self.topMargin = 2.0;
 		_pointerSize = 12.0;
 		_sidePadding = 2.0;
         _borderWidth = 1.0;
